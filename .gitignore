@@ -1,0 +1,16 @@
+# intellij
+*.iml
+*.ipr
+*.iws
+.idea/
+.gradle/
+out/
+build/
+node_modules/
+dist/
+run/
+
+.DS_Store
+[Dd]esktop.ini
+
+!gradle/wrapper/gradle-wrapper.jar
