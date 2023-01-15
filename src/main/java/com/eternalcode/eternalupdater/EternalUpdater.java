@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONObject;
 
 public class EternalUpdater {
-    private PluginData pluginData;
+    private final PluginData pluginData;
 
     /**
      * @param pluginName Name of the checked plugin
@@ -20,7 +20,7 @@ public class EternalUpdater {
 
     public RemoteInformation checkUpdates() {
         JSONObject response = HttpClient.doRequest("repos/" + this.pluginData.getGithubRepository() + "/releases/latest");
-        Boolean newVersionAvailable = this.pluginData.getPluginVersion() != (String) response.get("tag_name");
+        boolean newVersionAvailable = this.pluginData.getPluginVersion() != (String) response.get("tag_name");
         String latestTag = (String) response.get("tag_name");
         String newDownloadUri = (String) response.get("zipball_url");
 

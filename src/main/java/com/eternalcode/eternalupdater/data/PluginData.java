@@ -1,9 +1,9 @@
 package com.eternalcode.eternalupdater.data;
 
 public class PluginData {
-    private String githubRepository;
-    private String pluginVersion;
-    private String pluginName;
+    private final String githubRepository;
+    private final String pluginVersion;
+    private final String pluginName;
 
     public PluginData(String githubRepository, String pluginVersion, String pluginName) {
         this.githubRepository = githubRepository;
@@ -12,26 +12,15 @@ public class PluginData {
     }
 
     public String getGithubRepository() {
-        return githubRepository;
-    }
-
-    public void setGithubRepository(String githubRepository) {
-        this.githubRepository = githubRepository;
+        return this.githubRepository;
     }
 
     public String getPluginVersion() {
-        return pluginVersion;
-    }
-
-    public void setPluginVersion(String pluginVersion) {
-        this.pluginVersion = pluginVersion;
+        return this.pluginVersion;
     }
 
     public String getPluginName() {
-        return pluginName;
+        return this.pluginName;
     }
 
-    public void setPluginName(String pluginName) {
-        this.pluginName = pluginName;
-    }
 }

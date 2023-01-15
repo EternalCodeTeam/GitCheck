@@ -19,12 +19,7 @@ public class HttpClient {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            JSONObject jsonResponse = (JSONObject) new JSONParser()
-                    .parse(
-                            response
-                                    .body()
-                                    .string()
-                    );
+            JSONObject jsonResponse = (JSONObject) new JSONParser().parse(response.body().string());
 
             if (jsonResponse.containsKey("message")) {
                 throw new Exception("[EternalUpdater] Provided repository was not found");
