@@ -25,8 +25,9 @@ public class EternalUpdater {
         JSONObject response = HttpClient.doRequest("repos/" + this.pluginData.getGithubRepository() + "/releases/latest");
         RemoteInformation remoteInformation = new RemoteInformation();
 
+        // TODO: To refactor
         remoteInformation.setCurrentVersion(response.isEmpty() ? this.pluginData.getPluginVersion() : (String) response.get("tag_name"));
-        remoteInformation.setAvailableNewVersion(response.isEmpty() ? false : this.pluginData.getPluginVersion() != (String) response.get("tag_name"));
+        remoteInformation.setAvailableNewVersion(!response.isEmpty() && this.pluginData.getPluginVersion() != (String) response.get("tag_name"));
         remoteInformation.setDownloadUri(response.isEmpty() ? "https://github.com/" + this.pluginData.getGithubRepository() : (String) response.get("zipball_url"));
 
         return remoteInformation;

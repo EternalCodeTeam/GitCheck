@@ -12,11 +12,17 @@ public class HttpClient {
 
     public static JSONObject doRequest(String url)
     {
-        Request request = new Request.Builder().url(baseUri + "/" + url).build();
+        Request request = new Request.Builder().url(baseUri + "" + url).build();
         try (Response response = client.newCall(request).execute()){
-            return response.body() != null ? (JSONObject) new JSONParser().parse(response.body().string()) : null;
+            JSONObject jsonResponse = (JSONObject) new JSONParser().parse(response.body().string());
+
+            if(jsonResponse.containsKey("message")) {
+                throw new Exception("[EternalUpdater] Provided repository was not found");
+            } else {
+                return jsonResponse;
+            }
         } catch (Exception e) {
-            return null;
+            throw new RuntimeException(e);
         }
     }
 
