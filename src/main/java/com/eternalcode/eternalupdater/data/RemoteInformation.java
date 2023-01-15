@@ -5,6 +5,12 @@ public class RemoteInformation {
     private String currentVersion;
     private String downloadUri;
 
+    public RemoteInformation(boolean isAvailableNewVersion, String currentVersion, String downloadUri) {
+        this.isAvailableNewVersion = isAvailableNewVersion;
+        this.currentVersion = currentVersion;
+        this.downloadUri = downloadUri;
+    }
+
     public String getDownloadUri() {
         return downloadUri;
     }

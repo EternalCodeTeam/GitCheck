@@ -5,6 +5,12 @@ public class PluginData {
     private String pluginVersion;
     private String pluginName;
 
+    public PluginData(String githubRepository, String pluginVersion, String pluginName) {
+        this.githubRepository = githubRepository;
+        this.pluginVersion = pluginVersion;
+        this.pluginName = pluginName;
+    }
+
     public String getGithubRepository() {
         return githubRepository;
     }

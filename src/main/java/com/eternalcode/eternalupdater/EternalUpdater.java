@@ -15,21 +15,19 @@ public class EternalUpdater {
      * @param githubRepo Github remote repository name (ex. eternalcodeteam/eternalcore)
      */
     public EternalUpdater(@NotNull String pluginName, @NotNull String pluginVersion, @NotNull String githubRepo) {
-        this.pluginData = new PluginData();
-        this.pluginData.setPluginName(pluginName);
-        this.pluginData.setPluginVersion(pluginVersion);
-        this.pluginData.setGithubRepository(githubRepo);
+        this.pluginData = new PluginData(githubRepo, pluginVersion, pluginName);
     }
 
     public RemoteInformation checkUpdates() {
         JSONObject response = HttpClient.doRequest("repos/" + this.pluginData.getGithubRepository() + "/releases/latest");
-        RemoteInformation remoteInformation = new RemoteInformation();
+        Boolean newVersionAvailable = this.pluginData.getPluginVersion() != (String) response.get("tag_name");
+        String latestTag = (String) response.get("tag_name");
+        String newDownloadUri = (String) response.get("zipball_url");
 
-        // TODO: To refactor
-        remoteInformation.setCurrentVersion(response.isEmpty() ? this.pluginData.getPluginVersion() : (String) response.get("tag_name"));
-        remoteInformation.setAvailableNewVersion(!response.isEmpty() && this.pluginData.getPluginVersion() != (String) response.get("tag_name"));
-        remoteInformation.setDownloadUri(response.isEmpty() ? "https://github.com/" + this.pluginData.getGithubRepository() : (String) response.get("zipball_url"));
-
-        return remoteInformation;
+        return new RemoteInformation(
+                newVersionAvailable,
+                latestTag,
+                newDownloadUri
+        );
     }
 }
