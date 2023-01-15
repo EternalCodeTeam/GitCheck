@@ -12,7 +12,6 @@ public class HttpClient {
     private final static OkHttpClient client = new OkHttpClient();
 
     public static JSONObject doRequest(String url) {
-
         Request request = new Request
                 .Builder()
                 .url(baseUri + "" + url)

@@ -1,6 +1,7 @@
 package com.eternalcode.eternalupdater.data;
 
 public class PluginData {
+
     private final String githubRepository;
     private final String pluginVersion;
     private final String pluginName;

@@ -1,6 +1,7 @@
 package com.eternalcode.eternalupdater.data;
 
 public class RemoteInformation {
+
     private final boolean isAvailableNewVersion;
     private final String currentVersion;
     private final String downloadUri;
