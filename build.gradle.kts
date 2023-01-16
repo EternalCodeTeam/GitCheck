@@ -25,7 +25,13 @@ dependencies {
 
 publishing {
     publications {
+        create<MavenPublication>("maven") {
+            groupId = "com.eternalcode"
+            artifactId = "eternalupdater"
+            version = System.getenv("E_VERSION")
 
+            from(components["java"])
+        }
     }
     repositories {
         maven {
