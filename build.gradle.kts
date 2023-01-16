@@ -1,5 +1,3 @@
-import java.net.URI
-
 plugins {
     `java-library`
     `maven-publish`
@@ -7,6 +5,11 @@ plugins {
 
 group = "com.eternalcode"
 version = System.getenv("E_VERSION")
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
 
 repositories {
     mavenCentral()
