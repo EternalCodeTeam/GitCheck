@@ -32,8 +32,8 @@ publishing {
             name = "eternalcode-repository"
             url = URI("https://repo.eternalcode.pl")
             credentials {
-                username = System.getenv("GITHUB_REPO_USERNAME")
-                password = System.getenv("GITHUB_REPO_PASS")
+                username = System.getenv("E_REPO_USERNAME")
+                password = System.getenv("E_REPO_PASS")
             }
         }
     }

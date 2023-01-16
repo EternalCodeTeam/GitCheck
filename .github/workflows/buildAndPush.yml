@@ -21,6 +21,6 @@ jobs:
         with:
           arguments: publish
         env:
-          GITHUB_REPO_USERNAME: ${{ secrets.GITHUB_REPO_USERNAME }}
-          GITHUB_REPO_PASS: ${{ secrets.GITHUB_REPO_PASS }}
+          E_REPO_USERNAME: ${{ secrets.E_REPO_USERNAME }}
+          E_REPO_PASS: ${{ secrets.E_REPO_PASS }}
           E_VERSION: ${{ github.ref_name }}
