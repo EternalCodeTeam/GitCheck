@@ -38,7 +38,8 @@ public class HttpClient {
             else {
                 return jsonResponse;
             }
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             throw new RuntimeException(exception);
         }
     }
