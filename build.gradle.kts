@@ -30,7 +30,7 @@ publishing {
     repositories {
         maven {
             name = "eternalcode-repository"
-            url = "https://repo.eternalcode.pl/releases"
+            url = uri("https://repo.eternalcode.pl/releases")
             credentials {
                 username = System.getenv("E_REPO_USERNAME")
                 password = System.getenv("E_REPO_PASS")
