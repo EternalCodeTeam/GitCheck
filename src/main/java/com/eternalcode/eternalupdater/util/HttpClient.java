@@ -7,16 +7,27 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class HttpClient {
-    public static String baseUri = "https://api.github.com/";
-    public static OkHttpClient client = new OkHttpClient();
 
-    public static JSONObject doRequest(String url)
-    {
-        Request request = new Request.Builder().url(baseUri + "/" + url).build();
-        try (Response response = client.newCall(request).execute()){
-            return response.body() != null ? (JSONObject) new JSONParser().parse(response.body().string()) : null;
+    private final static String baseUri = "https://api.github.com/";
+    private final static OkHttpClient client = new OkHttpClient();
+
+    public static JSONObject doRequest(String url) {
+        Request request = new Request
+                .Builder()
+                .url(baseUri + "" + url)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            JSONObject jsonResponse = (JSONObject) new JSONParser().parse(response.body().string());
+
+            if (jsonResponse.containsKey("message")) {
+                throw new Exception("[EternalUpdater] Provided repository was not found");
+            }
+            else {
+                return jsonResponse;
+            }
         } catch (Exception e) {
-            return null;
+            throw new RuntimeException(e);
         }
     }
 
