@@ -1,7 +1,7 @@
 name: Publish package to EternalCode Repository
 on:
   release:
-    types: [created]
+    types: [published]
 jobs:
   publish:
     runs-on: ubuntu-latest
