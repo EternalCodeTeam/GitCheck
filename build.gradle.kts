@@ -1,10 +1,12 @@
+import java.net.URI
+
 plugins {
     `java-library`
     `maven-publish`
 }
 
 group = "com.eternalcode"
-version = "1.0.0"
+version = System.getenv("E_VERSION")
 
 repositories {
     mavenCentral()
@@ -19,6 +21,22 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+}
+
+publishing {
+    publications {
+
+    }
+    repositories {
+        maven {
+            name = "eternalcode-repository"
+            url = URI("https://repo.eternalcode.pl")
+            credentials {
+                username = System.getenv("GITHUB_REPO_USERNAME")
+                password = System.getenv("GITHUB_REPO_PASS")
+            }
+        }
+    }
 }
 
 tasks.getByName<Test>("test") {
