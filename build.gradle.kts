@@ -1,14 +1,19 @@
 plugins {
     `java-library`
     `maven-publish`
+    id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
 group = "com.eternalcode"
-version = System.getenv("E_VERSION")
+version = "1.0.0"
+val artifactId = "gitcheck"
 
 java {
     withJavadocJar()
     withSourcesJar()
+
+    sourceCompatibility = JavaVersion.VERSION_1_9
+    targetCompatibility = JavaVersion.VERSION_1_9
 }
 
 repositories {
@@ -17,21 +22,23 @@ repositories {
 
 dependencies {
     // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
-    implementation("com.googlecode.json-simple:json-simple:1.1.1")
+    api("com.googlecode.json-simple:json-simple:1.1.1") {
+        exclude(group = "junit")
+    }
 
-    // OkHTTP
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    api("org.jetbrains:annotations:23.1.0")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+    testImplementation("nl.jqno.equalsverifier:equalsverifier:3.12.3")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
 }
 
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            groupId = "com.eternalcode"
-            artifactId = "updater"
-            version = System.getenv("E_VERSION")
+            groupId = "$group"
+            artifactId = artifactId
+            version = "${project.version}"
 
             from(components["java"])
         }
@@ -40,9 +47,10 @@ publishing {
         maven {
             name = "eternalcode-repository"
             url = uri("https://repo.eternalcode.pl/releases")
+
             credentials {
-                username = System.getenv("E_REPO_USERNAME")
-                password = System.getenv("E_REPO_PASS")
+                username = System.getenv("ETERNALCODE_REPO_USERNAME")
+                password = System.getenv("ETERNALCODE_REPO_PASSWORD")
             }
         }
     }

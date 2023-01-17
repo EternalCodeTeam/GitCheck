@@ -1,2 +1,2 @@
-rootProject.name = "eternalupdater"
+rootProject.name = "gitcheck"
 
