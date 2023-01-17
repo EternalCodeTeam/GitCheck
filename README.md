@@ -46,7 +46,7 @@ public class MyPlugin {
 ```
 
 ### Maven/Gradle
-Get the latest version from [EternalCode Repository](https://repo.eternalcode.pl/#/releases/com/eternalcode/eternalupdater)
+Get the latest version from [EternalCode Repository](https://repo.eternalcode.pl/#/releases/com/eternalcode/updater)
 
 #### gradle groovy
 ```groovy
