@@ -1,79 +1,80 @@
-# Updater 
+# GitCheck
+GitCheck is a Java library that makes it easy to check for updates to a GitHub repository. 
+It utilizes the GitHub API to retrieve information about the latest release and compares it to the current version of your application. 
+With GitCheck, you can ensure that your users are always running the latest version of your software.
 
-#### Updater is a library for checking for updates for your plugin on GitHub. It uses the GitHub API to get information about the latest release of your plugin and compare it to the current version of your plugin.
+## Features
+- Simple and easy-to-use API
+- Lightweight and efficient
+- Supports Java 9 and above
+- Utilizes the GitHub API for retrieving release information
+- You can add your own implementation for another platform
 
-### Usage
-First, you need to create an instance of the `Updater` class by passing the plugin name, current version, and Github repository name as arguments. Then, you can call the `checkUpdates()` method to check for updates and get the `RemoteInformation` object.
+## Installation
 
-The `RemoteInformation` object contains information about the update, such as the availability of a new version, the current version, and the download URI.
-
-```java
-if (remoteInformation.isAvailableNewVersion()) {
-    System.out.println("A new version is available: " + remoteInformation.getCurrentVersion());
-    System.out.println("Download URI: " + remoteInformation.getDownloadUri());
-} else {
-    System.out.println("You are already running the latest version.");
-}
-```
-
-### Example
-Here's an example of how to can use the Updater in `Spigot` plugin
-
-```java
-
-import com.eternalcode.updater.Updater;
-import com.eternalcode.updater.http.RemoteInformation;
-
-public class MyPlugin {
-
-    private Updater updater;
-
-    public void onEnable() {
-        updater = new Updater("MyPlugin", "1.0", "MyGithubUsername/MyPlugin");
-        checkForUpdates();
-    }
-
-    private void checkForUpdates() {
-        RemoteInformation remoteInformation = updater.checkUpdates();
-        if (remoteInformation.isAvailableNewVersion()) {
-            System.out.println("A new version is available: " + remoteInformation.getCurrentVersion());
-            System.out.println("Download URI: " + remoteInformation.getDownloadUri());
-        } else {
-            System.out.println("You are already running the latest version.");
-        }
-    }
-}
-```
-
-### Maven/Gradle
-Get the latest version from [EternalCode Repository](https://repo.eternalcode.pl/#/releases/com/eternalcode/updater)
-
-#### gradle groovy
-```groovy
-maven { url "https://repo.eternalcode.pl/releases" }
-
-implementation "com.eternalcode:updater:{VERSION}"
-```
+To use GitCheck in your project, if you are using Gradle, add the following to your `build.gradle` file:
 
 ```kotlin
 maven { url = uri("https://repo.eternalcode.pl/releases") }
-
-implementation("com.eternalcode:updater:{VERSION}")
 ```
+
+```kotlin
+implementation("com.eternalcode:gitcheck:1.0.0")
+```
+
+Or, if you are using Maven, add the following to your `pom.xml` file:
 
 ```xml
 <repository>
-  <id>eternalcode-reposilite-releases</id>
-  <name>EternalCode Repository</name>
-  <url>https://repo.eternalcode.pl/releases</url>
+    <id>eternalcode-releases</id>
+    <url>https://repo.eternalcode.pl/releases</url>
 </repository>
+```
 
+```xml
 <dependency>
-<groupId>com.eternalcode</groupId>
-<artifactId>updater</artifactId>
-<version>{VERSION}</version>
+    <groupId>com.eternalcode</groupId>
+    <artifactId>gitcheck</artifactId>
+    <version>1.0.0</version>
 </dependency>
 ```
 
+## API Usage
 
+To use GitCheck, you need to create an instance of the `GitCheck` class.
+Create `GitRepository` and `GitTag` objects to specify the repository and the current version of your application.
+Then, call the `checkRelease` method to check for updates.
 
+```java
+public class MyApplication {
+
+    public static void main(String[] args) {
+        GitCheck gitCheck = new GitCheck();
+        GitRepository repository = GitRepository.of("Owner", "Project");
+
+        GitCheckResult result = gitCheck.checkRelease(repository, GitTag.of("v1.0.0"));
+
+        if (!result.isUpToDate()) {
+            GitRelease release = result.getLatestRelease();
+            GitTag tag = release.getTag();
+
+            System.out.println("A new version is available: " + tag.getTag());
+            System.out.println("See release page: " + release.getPageUrl());
+            System.out.println("Release date: " + release.getPublishedAt());
+        }
+        
+        // ...
+    }
+
+}
+```
+In this example, `GitCheck` is used to check for updates to the repository `Owner/Project` with the current version `v1.0.0`.
+If a new version is available, the details of the release are printed to the console.
+
+## Contributing
+We welcome contributions to GitCheck!
+If you have an idea for a new feature or have found a bug that needs to be fixed, you can [open an issue](https://github.com/EternalCodeTeam/GitCheck/issues/new) or [submit a pull request](https://github.com/EternalCodeTeam/GitCheck/compare) with your changes.<br>
+See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for more information.
+
+## License
+GitCheck is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
