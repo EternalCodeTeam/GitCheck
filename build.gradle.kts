@@ -30,7 +30,7 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             groupId = "com.eternalcode"
-            artifactId = "eternalupdater"
+            artifactId = "updater"
             version = System.getenv("E_VERSION")
 
             from(components["java"])
