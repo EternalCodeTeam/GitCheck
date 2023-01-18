@@ -73,7 +73,7 @@ If a new version is available, the details of the release are printed to the con
 
 ## Contributing
 We welcome contributions to GitCheck!
-If you have an idea for a new feature or have found a bug that needs to be fixed, you can [open an issue](https://github.com/EternalCodeTeam/GitCheck/issues/new) or [submit a pull request](https://github.com/EternalCodeTeam/GitCheck/compare) with your changes.<br>
+If you have an idea for a new feature or have found a bug that needs to be fixed, you can [open an issue](https://github.com/EternalCodeTeam/GitCheck/issues/new) or [submit a pull request](https://github.com/EternalCodeTeam/GitCheck/compare) with your changes.
 See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for more information.
 
 ## License
