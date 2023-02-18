@@ -18,8 +18,6 @@ java {
 
 repositories {
     mavenCentral()
-    mavenLocal()
-    gradlePluginPortal()
 }
 
 dependencies {
