@@ -26,7 +26,7 @@ dependencies {
         exclude(group = "junit")
     }
 
-    api("org.jetbrains:annotations:23.1.0")
+    api("org.jetbrains:annotations:24.0.0")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
     testImplementation("nl.jqno.equalsverifier:equalsverifier:3.12.3")
