@@ -1,3 +1,5 @@
+![](/assets/readme-banner.png)
+
 # ✔ GitCheck
 GitCheck is a Java library that makes it easy to check for updates to a GitHub repository. 
 It utilizes the GitHub API to retrieve information about the latest release and compares it to the current version of your application. 
