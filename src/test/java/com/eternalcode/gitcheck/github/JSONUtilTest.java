@@ -32,7 +32,7 @@ class JSONUtilTest {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("text", "test");
 
-        assertThrows(NoSuchElementException.class, () -> JSONUtil.asString(jsonObject, "time"));
+        assertThrows(IllegalArgumentException.class, () -> JSONUtil.asString(jsonObject, "time"));
     }
 
     @Test

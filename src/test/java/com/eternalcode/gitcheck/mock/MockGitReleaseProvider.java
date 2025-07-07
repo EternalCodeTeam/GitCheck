@@ -19,5 +19,4 @@ public class MockGitReleaseProvider implements GitReleaseProvider {
                 .publishedAt(Instant.parse("2020-01-01T00:00:00Z"))
                 .build();
     }
-
 }

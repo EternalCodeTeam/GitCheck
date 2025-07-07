@@ -1,7 +1,6 @@
 plugins {
     `java-library`
     `maven-publish`
-    id("com.github.johnrengelman.shadow") version "8.1.0"
 }
 
 group = "com.eternalcode"
@@ -11,9 +10,8 @@ val artifactId = "gitcheck"
 java {
     withJavadocJar()
     withSourcesJar()
-
-    sourceCompatibility = JavaVersion.VERSION_1_9
-    targetCompatibility = JavaVersion.VERSION_1_9
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
@@ -21,12 +19,10 @@ repositories {
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
     api("com.googlecode.json-simple:json-simple:1.1.1") {
         exclude(group = "junit")
     }
-
-    api("org.jetbrains:annotations:24.0.1")
+    api("org.jetbrains:annotations:26.0.2")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
     testImplementation("nl.jqno.equalsverifier:equalsverifier:3.14.1")
@@ -34,28 +30,30 @@ dependencies {
 }
 
 publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            groupId = "$group"
-            artifactId = artifactId
-            version = "${project.version}"
-
-            from(components["java"])
-        }
-    }
     repositories {
+        mavenLocal()
+
         maven {
-            name = "eternalcode-repository"
             url = uri("https://repo.eternalcode.pl/releases")
 
-            credentials {
-                username = System.getenv("ETERNALCODE_REPO_USERNAME")
-                password = System.getenv("ETERNALCODE_REPO_PASSWORD")
+            if (version.toString().endsWith("-SNAPSHOT")) {
+                url = uri("https://repo.eternalcode.pl/snapshots")
             }
+
+            credentials {
+                username = System.getenv("ETERNAL_CODE_MAVEN_USERNAME")
+                password = System.getenv("ETERNAL_CODE_MAVEN_PASSWORD")
+            }
+        }
+    }
+
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
         }
     }
 }
 
-tasks.getByName<Test>("test") {
+tasks.test {
     useJUnitPlatform()
 }

@@ -1,10 +1,9 @@
 package com.eternalcode.gitcheck.git;
 
 import com.eternalcode.gitcheck.shared.Preconditions;
+import java.util.Objects;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
 
 /**
  * Represents a git tag.
@@ -16,12 +15,30 @@ public final class GitTag {
     /**
      * Creates a new instance of {@link GitTag} with the given tag.
      *
-     * @see #of(String)
      * @param tag the tag
+     * @see #of(String)
      */
     private GitTag(@NotNull String tag) {
         Preconditions.notNull(tag, "tag");
         this.tag = tag;
+    }
+
+    /**
+     * Creates a new instance of {@link GitTag} with the given tag.
+     * <p>
+     * Tag should be in the format of {@code v1.0.0}, but it can be anything.
+     * <br>
+     * This method does not validate the tag.
+     * <br>
+     * </p>
+     *
+     * @param tag the tag
+     * @return the git tag
+     * @throws IllegalArgumentException if the tag is null
+     */
+    @Contract("_ -> new")
+    public static GitTag of(@NotNull String tag) {
+        return new GitTag(tag);
     }
 
     @NotNull
@@ -35,11 +52,10 @@ public final class GitTag {
             return true;
         }
 
-        if (!(object instanceof GitTag)) {
+        if (!(object instanceof GitTag gitTag)) {
             return false;
         }
 
-        GitTag gitTag = (GitTag) object;
         return this.tag.equals(gitTag.tag);
     }
 
@@ -52,23 +68,4 @@ public final class GitTag {
     public String toString() {
         return this.tag;
     }
-
-    /**
-     * Creates a new instance of {@link GitTag} with the given tag.
-     * <p>
-     *     Tag should be in the format of {@code v1.0.0}, but it can be anything.
-     *     <br>
-     *     This method does not validate the tag.
-     *     <br>
-     * </p>
-     *
-     * @throws IllegalArgumentException if the tag is null
-     * @param tag the tag
-     * @return the git tag
-     */
-    @Contract("_ -> new")
-    public static GitTag of(@NotNull String tag) {
-        return new GitTag(tag);
-    }
-
 }

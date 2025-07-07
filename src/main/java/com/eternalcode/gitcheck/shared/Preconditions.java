@@ -17,5 +17,4 @@ public final class Preconditions {
             throw new IllegalArgumentException(name + " cannot be empty");
         }
     }
-
 }

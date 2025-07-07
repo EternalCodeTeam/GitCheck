@@ -1,10 +1,9 @@
 package com.eternalcode.gitcheck.git;
 
 import com.eternalcode.gitcheck.shared.Preconditions;
+import java.time.Instant;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-
-import java.time.Instant;
 
 public final class GitRelease {
 
@@ -14,12 +13,24 @@ public final class GitRelease {
     private final String pageUrl;
     private final Instant publishedAt;
 
-    private GitRelease(@NotNull String name, @NotNull String branch, @NotNull GitTag tag, @NotNull String pageUrl, @NotNull Instant publishedAt) {
+    private GitRelease(
+            @NotNull String name,
+            @NotNull String branch,
+            @NotNull GitTag tag,
+            @NotNull String pageUrl,
+            @NotNull Instant publishedAt
+    ) {
         this.name = name;
         this.branch = branch;
         this.tag = tag;
         this.pageUrl = pageUrl;
         this.publishedAt = publishedAt;
+    }
+
+    @NotNull
+    @Contract("-> new")
+    public static Builder builder() {
+        return new Builder();
     }
 
     @NotNull
@@ -45,12 +56,6 @@ public final class GitRelease {
     @NotNull
     public Instant getPublishedAt() {
         return this.publishedAt;
-    }
-
-    @NotNull
-    @Contract("-> new")
-    public static Builder builder() {
-        return new Builder();
     }
 
     public static class Builder {
@@ -100,7 +105,5 @@ public final class GitRelease {
 
             return new GitRelease(this.name, this.branch, this.tag, this.pageUrl, this.publishedAt);
         }
-
     }
-
 }
