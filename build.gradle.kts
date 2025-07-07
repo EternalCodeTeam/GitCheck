@@ -41,8 +41,8 @@ publishing {
             }
 
             credentials {
-                username = System.getenv("ETERNAL_CODE_MAVEN_USERNAME")
-                password = System.getenv("ETERNAL_CODE_MAVEN_PASSWORD")
+                username = System.getenv("ETERNALCODE_REPO_USERNAME")
+                password = System.getenv("ETERNALCODE_REPO_PASSWORD")
             }
         }
     }
