@@ -1,7 +1,7 @@
 plugins {
     `java-library`
     `maven-publish`
-    id("com.github.johnrengelman.shadow") version "8.1.0"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 group = "com.eternalcode"
@@ -26,11 +26,11 @@ dependencies {
         exclude(group = "junit")
     }
 
-    api("org.jetbrains:annotations:24.0.1")
+    api("org.jetbrains:annotations:26.0.2-1")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
-    testImplementation("nl.jqno.equalsverifier:equalsverifier:3.14.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:6.0.1")
+    testImplementation("nl.jqno.equalsverifier:equalsverifier:4.2.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:6.0.1")
 }
 
 publishing {
