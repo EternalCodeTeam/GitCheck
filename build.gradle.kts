@@ -29,7 +29,7 @@ dependencies {
     api("org.jetbrains:annotations:24.1.0")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
-    testImplementation("nl.jqno.equalsverifier:equalsverifier:3.14.1")
+    testImplementation("nl.jqno.equalsverifier:equalsverifier:3.19.4")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
 }
 
