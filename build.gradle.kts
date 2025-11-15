@@ -1,7 +1,7 @@
 plugins {
     `java-library`
     `maven-publish`
-    id("com.github.johnrengelman.shadow") version "8.1.0"
+    id("com.gradleup.shadow") version "9.2.2"
 }
 
 group = "com.eternalcode"
