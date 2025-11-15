@@ -1,5 +1,7 @@
 ![](/assets/readme-banner.png)
 
+# ⚠️ This repository has been deprecated since November 15th, 2025. If you would like to use an updater system, please refer to [EternalCodeCommons](https://github.com/EternalCodeTeam/EternalCodeCommons)]
+
 # ✔ GitCheck
 GitCheck is a Java library that makes it easy to check for updates to a GitHub repository. 
 It utilizes the GitHub API to retrieve information about the latest release and compares it to the current version of your application. 
